@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+
 import type { PostType } from "../../Types/Post.type";
 import Post from "../../Components/Post/Post";
 
@@ -40,7 +40,7 @@ export default function Home() {
   // if (isError) {
   //   return <h1> Error... </h1>;
   // }
-  const { data, isLoading, isError, error, isFetching } = useQuery({
+  const { data, isLoading, isError, error} = useQuery({
     queryKey: ["getAllPosts"],
     queryFn: getAllPosts,  
   });

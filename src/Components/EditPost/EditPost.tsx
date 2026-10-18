@@ -1,5 +1,5 @@
-import React, { use, useRef, useState } from "react";
-import { FaTimes, FaImage } from "react-icons/fa";
+import React, { useRef, useState } from "react";
+import { FaTimes } from "react-icons/fa";
 import type { PostType } from "../../Types/Post.type";
 import axios from "axios";
 import { FiImage } from "react-icons/fi";

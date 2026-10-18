@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useForm } from "react-hook-form";
 import { RegisterSchema } from "../../Schemas/auth.schema";
 import { type RegisterSchemaType } from "../../Schemas/auth.schema";
@@ -33,7 +33,7 @@ export default function Register() {
     resolver: zodResolver(RegisterSchema),
     mode: "onChange",
   });
-  let { register, handleSubmit, formState, getValues, setError } = form;
+  let { register, handleSubmit, formState} = form;
   // console.log(formState.errors);
   function handleRegister(values: RegisterSchemaType) {
     setIsloading(true);

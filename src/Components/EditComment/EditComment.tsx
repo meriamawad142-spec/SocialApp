@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import type { CommentType } from "../Comment/Comment";
 import { FaTimes } from "react-icons/fa";
-import { FaImage } from "react-icons/fa";
+
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -34,10 +34,12 @@ export default function EditComment({
       },
     );
   }
-  function handleImagePreview(e) {
-    console.log(e.target.files[0]);
-    //img to back end
-    const path = URL.createObjectURL(e.target.files[0]);
+  function handleImagePreview(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    const path = URL.createObjectURL(file);
     setImagePreview(path);
   }
   const { mutate, isPending } = useMutation({
@@ -159,19 +161,15 @@ export default function EditComment({
           </button>
 
           <button
-          disabled={isPending}
+            disabled={isPending}
             className="cursor-pointer divide-slate-900 disabled:cursor-pointer rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
             onClick={handleEditComment}
-
           >
-           {isPending ? (
-                           <FaSpinner className="animate-spin" />
-                         ) : (
-                           <>
-                            
-                            Save Changes
-                           </>
-                         )}
+            {isPending ? (
+              <FaSpinner className="animate-spin" />
+            ) : (
+              <>Save Changes</>
+            )}
           </button>
         </div>
       </div>

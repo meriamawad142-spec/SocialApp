@@ -6,12 +6,12 @@ import Login from "./Pages/Login/Login";
 import Notfound from "./Pages/Notfound/Notfound";
 import Profile from "./Pages/Profile/Profile";
 import Register from "./Pages/Register/Register";
-import CounterContextProvider from "./Context/CounterContext";
+
 import AuthContextProvider from "./Context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
-import  { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import PostDetails from './Pages/PostDetails/PostDetails';
+import PostDetails from "./Pages/PostDetails/PostDetails";
 
 const query = new QueryClient();
 const routes = createBrowserRouter([
@@ -71,10 +71,8 @@ function App() {
     <>
       <QueryClientProvider client={query}>
         <AuthContextProvider>
-          <CounterContextProvider>
-            <Toaster />
-            <RouterProvider router={routes}></RouterProvider>
-          </CounterContextProvider>
+          <Toaster />
+          <RouterProvider router={routes}></RouterProvider>
         </AuthContextProvider>
       </QueryClientProvider>
     </>

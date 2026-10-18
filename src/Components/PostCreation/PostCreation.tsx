@@ -1,8 +1,7 @@
 import { FiImage, FiSend } from "react-icons/fi";
 import { MdCancel } from "react-icons/md";
 
-import bird from "../../assets/bird.webp";
-import {  useRef, useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaSpinner } from "react-icons/fa";
@@ -11,10 +10,9 @@ export default function PostCreation() {
   const [isUploaded, setisUploaded] = useState("");
   const queryClient = useQueryClient();
 
-  const formData = new FormData();
-  const textInput = useRef(null);
-  const imgInput = useRef(null);
-  function CreatePost() {
+  const textInput = useRef<HTMLTextAreaElement>(null);
+  const imgInput = useRef<HTMLInputElement>(null);
+  function CreatePost(formData: FormData) {
     return axios.post(`https://route-posts.routemisr.com/posts`, formData, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -22,40 +20,54 @@ export default function PostCreation() {
     });
   }
   function clearForm() {
-    textInput.current.value = "";
-    imgInput.current.value = "";
+    if (textInput.current) {
+      textInput.current.value = "";
+    }
+
+    if (imgInput.current) {
+      imgInput.current.value = "";
+    }
+
     setisUploaded("");
   }
-  const { data, isPending, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: CreatePost,
-    onSuccess: (res) => {
+    onSuccess: () => {
       console.log("success");
       clearForm();
       queryClient.invalidateQueries({
         queryKey: ["getAllPosts"],
       });
     },
-    onError: (err) => {
+    onError: () => {
       console.log("error");
     },
     onSettled: () => {},
   });
   function handleCreatePost() {
-    if (textInput.current.value === "" && imgInput.current.value === "") {
+    const content = textInput.current?.value ?? "";
+    const image = imgInput.current?.files?.[0];
+
+    if (!content.trim() && !image) {
       return;
     }
-    if (textInput.current.value) {
-      formData.append("body", textInput.current?.value);
+
+    const formData = new FormData();
+
+    formData.append("content", content);
+
+    if (image) {
+      formData.append("image", image);
     }
-    if (imgInput.current.value) {
-      formData.append("image", imgInput.current.files[0]);
-    }
-    mutate();
+
+    mutate(formData);
   }
-  function handleImagePreview(e) {
-    console.log(e.target.files[0]);
-    //img to back end
-    const path = URL.createObjectURL(e.target.files[0]);
+  function handleImagePreview(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    const path = URL.createObjectURL(file);
     setisUploaded(path);
   }
   return (
@@ -96,7 +108,6 @@ export default function PostCreation() {
         <button
           disabled={isPending}
           type="submit"
-          
           onClick={handleCreatePost}
           className="flex items-center cursor-pointer gap-2 disabled:bg-slate-900 disabled:cursor-not-allowed rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
         >

@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useContext, useState } from "react";
+import  { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { LoginSchema, type LoginSchemaType } from "../../Schemas/auth.schema";
@@ -21,7 +21,7 @@ import { AuthContext } from "../../Context/AuthContext";
 export default function Login() {
   const [apiError, setApiError] = useState(null);
   const [isloading, setIsloading] = useState(false);
-  const { userToken, setUserToken } = useContext(AuthContext);
+  const {  setUserToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const form = useForm<LoginSchemaType>({
     defaultValues: {
@@ -31,7 +31,7 @@ export default function Login() {
     resolver: zodResolver(LoginSchema),
     mode: "onChange",
   });
-  let { register, handleSubmit, formState, getValues, setError } = form;
+  let { register, handleSubmit, formState } = form;
   // console.log(formState.errors);
   function handleRegister(values: LoginSchemaType) {
     setIsloading(true);

@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 
-import { FaComment, FaPen } from "react-icons/fa";
-import { FaShare } from "react-icons/fa";
+import {  FaPen } from "react-icons/fa";
+
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
 import { FaSpinner } from "react-icons/fa";
@@ -54,7 +54,7 @@ export default function Comment({
     );
   }
   const {
-    data: deleteMutationData,
+    
     isPending,
     mutate,
   } = useMutation({

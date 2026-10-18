@@ -28,7 +28,7 @@ export default function ChangePassword({
     resolver: zodResolver(ChangePasswordSchema),
     mode: "onBlur",
   });
-  const { userToken, setUserToken } = useContext(AuthContext);
+  const {  setUserToken } = useContext(AuthContext);
   const { mutate, isPending } = useMutation({
     mutationFn: (values: { password: string; newPassword: string }) =>
       axios.patch(

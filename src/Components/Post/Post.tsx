@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import  { useContext, useState } from "react";
 import type { PostType } from "../../Types/Post.type";
 import Comment, { type CommentType } from "./../Comment/Comment";
 import { Link, useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ export default function Post({
     );
   }
 
-  const { data, isLoading, isError, error, isFetching } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["getPostComments"],
     queryFn: getPostComments,
     enabled: isPostDetails,
@@ -55,7 +55,7 @@ export default function Post({
     });
   }
   const {
-    data: deleteMutationData,
+  
     isPending,
     mutate,
   } = useMutation({

@@ -35,7 +35,7 @@ export default function () {
       },
     );
   }
-  const { data: postUserData, isLoading: loadingUserData } = useQuery({
+  const { data: postUserData } = useQuery({
     queryKey: ["getUserPosts"],
     queryFn: getmyPosts,
     enabled: !isLoading && !isError && !!data,
