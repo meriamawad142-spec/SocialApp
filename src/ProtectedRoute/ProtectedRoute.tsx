@@ -1,5 +1,5 @@
-import React, { type ReactNode } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { type ReactNode } from "react";
+import { Navigate} from "react-router-dom";
 type ProtectedRouteProps = {
   children: ReactNode;
 };

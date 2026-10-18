@@ -9,7 +9,7 @@ import Register from "./Pages/Register/Register";
 import CounterContextProvider from "./Context/CounterContext";
 import AuthContextProvider from "./Context/AuthContext";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
-import toast, { Toaster } from 'react-hot-toast';
+import  { Toaster } from 'react-hot-toast';
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import PostDetails from './Pages/PostDetails/PostDetails';
 

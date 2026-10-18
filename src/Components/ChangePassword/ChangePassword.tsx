@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import  { useContext } from "react";
 import { FaTimes, FaLock } from "react-icons/fa";
-import { FiEye } from "react-icons/fi";
+
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
@@ -10,7 +10,7 @@ import {
 } from "../../Schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { FiSend } from "react-icons/fi";
+
 import { FaSpinner } from "react-icons/fa";
 import { AuthContext } from "../../Context/AuthContext";
 

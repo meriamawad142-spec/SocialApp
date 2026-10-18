@@ -1,4 +1,4 @@
-import React from "react";
+
 import axios from "axios";
 import Loader from "../../Components/Loader/Loader";
 import { useParams } from "react-router-dom";
